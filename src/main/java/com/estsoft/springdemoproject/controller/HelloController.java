@@ -1,18 +1,22 @@
 package com.estsoft.springdemoproject.controller;
 
+import com.estsoft.springdemoproject.interf.InterDependencyService;
 import com.estsoft.springdemoproject.ioc.Member;
 import com.estsoft.springdemoproject.service.HelloService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-    private  HelloService service;   // Dependency Injection
+    private final HelloService service;
+    private final InterDependencyService dependencyService;
+    // Dependency Injection
 
-    public HelloController(HelloService service) {   // 요즘엔 이렇게 생성자 주입 방식으로 많이 씀
+    public HelloController(HelloService service, InterDependencyService dependencyService) {
+        // 요즘엔 이렇게 생성자 주입 방식으로 많이 씀
         this.service = service;
+        this.dependencyService = dependencyService;
     }
 
     @GetMapping("/hello")
