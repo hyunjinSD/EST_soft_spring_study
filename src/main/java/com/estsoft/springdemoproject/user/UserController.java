@@ -1,11 +1,8 @@
-package com.estsoft.springdemoproject.controller;
+package com.estsoft.springdemoproject.user;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -17,6 +14,16 @@ public class UserController {
     @GetMapping("/{id}")
     public Object getUser(@PathVariable Long id) {
         return userService.getUser(id);
+    }
+
+    @PostMapping("/")
+    public void createUser(@RequestBody UserRequest userRequest) {
+        userService.createUser(userRequest);
+    }
+
+    @PatchMapping("/{id}")
+    public void updateUserName(@PathVariable Long id, @RequestBody String name) {
+        userService.updateUserName(id, name);
     }
 
     @GetMapping("/")
